@@ -1,6 +1,6 @@
 # Sauce Demo Playwright Test Suite
 
-A comprehensive end-to-end test automation project for [https://www.saucedemo.com/](https://www.saucedemo.com/) using Playwright and TypeScript.
+A example test automation project for [https://www.saucedemo.com/](https://www.saucedemo.com/) using Playwright and TypeScript.
 
 ## Overview
 
