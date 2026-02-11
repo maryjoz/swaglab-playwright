@@ -44,7 +44,7 @@ export class CheckoutPage {
   }
 
   async getOrderTotal() {
-    const total = await this.page.locator('.summary_total').textContent();
+    const total = await this.page.locator('.summary_total_label').textContent();
     return total;
   }
 

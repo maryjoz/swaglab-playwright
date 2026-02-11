@@ -19,7 +19,10 @@ test.describe('Shopping Cart Tests', () => {
     expect(itemCount).toBe(2);
   });
 
-  test('should remove item from cart', async ({ cartPage }) => {
+  test('should remove item from cart', async ({ productsPage, cartPage, page }) => {
+    await productsPage.goToCart();
+    await expect(page).toHaveURL(/.*cart/);
+
     const initialCount = await cartPage.getCartItemCount();
     expect(initialCount).toBe(2);
     
@@ -29,7 +32,10 @@ test.describe('Shopping Cart Tests', () => {
     expect(finalCount).toBe(1);
   });
 
-  test('should display correct item names in cart', async ({ cartPage }) => {
+  test('should display correct item names in cart', async ({ productsPage, cartPage, page }) => {
+    await productsPage.goToCart();
+    await expect(page).toHaveURL(/.*cart/);
+
     const cartItems = await cartPage.getCartItemNames();
     expect(cartItems).toContain('Sauce Labs Backpack');
     expect(cartItems).toContain('Sauce Labs Bike Light');
@@ -50,11 +56,15 @@ test.describe('Shopping Cart Tests', () => {
     await expect(page).toHaveURL(/.*checkout-step-one/);
   });
 
-  test('should clear cart by removing all items', async ({ cartPage }) => {
+  test('should clear cart by removing all items', async ({ productsPage, cartPage, page }) => {
+    await productsPage.goToCart();
+    await expect(page).toHaveURL(/.*cart/);
+
     await cartPage.removeItem('Sauce Labs Backpack');
     await cartPage.removeItem('Sauce Labs Bike Light');
     
     const isEmpty = await cartPage.isCartEmpty();
     expect(isEmpty).toBeTruthy();
+
   });
 });

@@ -59,8 +59,12 @@ test.describe('Checkout Tests', () => {
     await expect(page.locator('.complete-header')).toBeVisible();
   });
 
-  test('should cancel checkout and return to cart', async ({ checkoutPage, page }) => {
+  test('should cancel checkout and return to cart', async ({ cartPage, checkoutPage, page }) => {
+    await cartPage.proceedToCheckout();
+
     await checkoutPage.fillCheckoutInfo('Tom', 'Clark', '22222');
+    await checkoutPage.proceedToOrderReview();
+
     await checkoutPage.cancel();
     
     await expect(page).toHaveURL(/.*inventory/);
