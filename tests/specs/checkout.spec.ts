@@ -89,4 +89,37 @@ test.describe('Checkout Tests', () => {
     const isFinishVisible = await checkoutPage.isFinishButtonVisible();
     expect(isFinishVisible).toBeTruthy();
   });
+
+  test('should display error message for missing first name on checkout info', async ({ cartPage, checkoutPage }) => {
+    await cartPage.proceedToCheckout();
+
+    await checkoutPage.fillCheckoutInfo('', 'Janeway', '33333');
+    await checkoutPage.proceedToOrderReview();
+
+    await expect(checkoutPage.errorMessage).toBeVisible();
+    const errorText = await checkoutPage.getErrorMessage();
+    expect(errorText).toContain('Error: First Name is required');
+  });
+
+  test('should display error message for missing last name on checkout info', async ({ cartPage, checkoutPage }) => {
+    await cartPage.proceedToCheckout();
+
+    await checkoutPage.fillCheckoutInfo('Kathryn', '', '33333');
+    await checkoutPage.proceedToOrderReview();
+
+    await expect(checkoutPage.errorMessage).toBeVisible();
+    const errorText = await checkoutPage.getErrorMessage();
+    expect(errorText).toContain('Error: Last Name is required');
+  });
+
+  test('should display error message for missing zip/postal code on checkout info', async ({ cartPage, checkoutPage }) => {
+    await cartPage.proceedToCheckout();
+
+    await checkoutPage.fillCheckoutInfo('Kathryn', 'Janeway', '');
+    await checkoutPage.proceedToOrderReview();
+
+    await expect(checkoutPage.errorMessage).toBeVisible();
+    const errorText = await checkoutPage.getErrorMessage();
+    expect(errorText).toContain('Error: Postal Code is required');
+  });
 });
