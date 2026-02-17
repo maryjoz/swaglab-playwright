@@ -2,6 +2,8 @@
 
 A example test automation project for [https://www.saucedemo.com/](https://www.saucedemo.com/) using Playwright and TypeScript.
 
+**Note:** This colproject lection is provided as a demonstration and is not intended as a comprehensive or exhaustive suite of tests.
+
 ## Overview
 
 This project provides automated UI tests for the Sauce Labs demo e-commerce application, covering:
